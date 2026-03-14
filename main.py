@@ -1,12 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 
-url = "https://example.com"
+def scrape_data(url, tag):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
 
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
-
-titles = soup.find_all("h2")
-
-for title in titles:
-    print(title.text.strip())
+    elements = soup.find_all(tag)
+    for el in elements:
+        print(el.text.strip())
